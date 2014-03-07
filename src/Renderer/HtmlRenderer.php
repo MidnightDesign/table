@@ -35,9 +35,14 @@ class HtmlRenderer implements RendererInterface
     private function getTable()
     {
         $table = $this->document->createElement('table');
-        $table->appendChild($this->getHead());
-        $table->appendChild($this->getBody());
-        $table->appendChild($this->getFoot());
+        $head = $this->getHead();
+        if ($head) {
+            $table->appendChild($head);
+        }
+        $body = $this->getBody();
+        if ($body) {
+            $table->appendChild($body);
+        }
         return $table;
     }
 
@@ -62,6 +67,9 @@ class HtmlRenderer implements RendererInterface
             $tr->appendChild($this->getTh($column));
         }
         $thead->appendChild($tr);
+        if (!$tr->hasChildNodes()) {
+            return null;
+        }
         return $thead;
     }
 
@@ -74,15 +82,10 @@ class HtmlRenderer implements RendererInterface
         foreach ($this->table->getRows() as $row) {
             $tbody->appendChild($this->getRow($row));
         }
+        if (!$tbody->hasChildNodes()) {
+            return null;
+        }
         return $tbody;
-    }
-
-    /**
-     * @return \DOMElement
-     */
-    private function getFoot()
-    {
-        return $this->document->createElement('tfoot');
     }
 
     /**
