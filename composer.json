@@ -1,0 +1,17 @@
+{
+    "name": "midnight/table",
+    "description": "A library for HTML tables",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rudolph Gottesheim",
+            "email": "r.gottesheim@loot.at"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Midnight\\Table\\": "src/"
+        }
+    }
+}
